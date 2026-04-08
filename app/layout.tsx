@@ -6,13 +6,13 @@ import { SiteChrome } from "@/components/site-chrome";
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"),
   title: {
-    default: "[PLACEHOLDER] Your Name",
-    template: "%s | [PLACEHOLDER] Your Name"
+    default: "Jonathan Duron",
+    template: "%s | Jonathan Duron"
   },
   description:
     "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
   openGraph: {
-    title: "[PLACEHOLDER] Your Name",
+    title: "Jonathan Duron",
     description:
       "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "[PLACEHOLDER] Your Name",
+    title: "Jonathan Duron",
     description:
       "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
     images: ["/og"]

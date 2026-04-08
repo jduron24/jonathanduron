@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Github } from "lucide-react";
@@ -76,6 +77,20 @@ export default async function ProjectPage({ params }: Props) {
           </a>
         ) : null}
       </div>
+      {project.coverImage ? (
+        <div className="overflow-hidden rounded-[2rem] border border-border bg-card/60 p-3">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[1.4rem]">
+            <Image
+              src={project.coverImage}
+              alt={`${project.title} cover image`}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </div>
+        </div>
+      ) : null}
       <div className="rounded-[2rem] border border-border bg-card/60 p-6 md:p-10">
         <MDXContent source={project.content} />
       </div>

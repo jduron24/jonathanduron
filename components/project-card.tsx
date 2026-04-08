@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Github } from "lucide-react";
 import type { ProjectMeta } from "@/lib/content";
@@ -5,7 +6,21 @@ import { formatDate } from "@/lib/utils";
 
 export function ProjectCard({ project }: { project: ProjectMeta }) {
   return (
-    <article className="rounded-[1.75rem] border border-border bg-card/60 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-glow">
+    <article className="overflow-hidden rounded-[1.75rem] border border-border bg-card/60 transition duration-300 hover:-translate-y-1 hover:shadow-glow">
+      {project.coverImage ? (
+        <Link href={`/projects/${project.slug}`} className="block">
+          <div className="relative aspect-[16/8] w-full overflow-hidden border-b border-border bg-background/60">
+            <Image
+              src={project.coverImage}
+              alt={`${project.title} cover image`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        </Link>
+      ) : null}
+      <div className="p-6">
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
           {formatDate(project.date)}
@@ -33,6 +48,17 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
               <ArrowUpRight className="h-4 w-4" />
             </a>
           ) : null}
+          {project.xUrl ? (
+            <a
+              href={project.xUrl}
+              className="inline-flex h-9 items-center justify-center rounded-full border border-border px-3 text-xs uppercase tracking-[0.2em] text-foreground/75 transition hover:bg-muted"
+              aria-label={`${project.title} demo on X`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              X Demo
+            </a>
+          ) : null}
         </div>
       </div>
       <Link href={`/projects/${project.slug}`} className="block">
@@ -51,6 +77,7 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
           ))}
         </div>
       </Link>
+      </div>
     </article>
   );
 }

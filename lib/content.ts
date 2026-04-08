@@ -6,6 +6,7 @@ import readingTime from "reading-time";
 const contentRoot = path.join(process.cwd(), "content");
 const blogRoot = path.join(contentRoot, "blog");
 const projectRoot = path.join(contentRoot, "projects");
+const publicProjectsRoot = path.join(process.cwd(), "public", "projects");
 
 export type BlogFrontmatter = {
   title: string;
@@ -22,6 +23,7 @@ export type ProjectFrontmatter = {
   tags: string[];
   url?: string;
   github?: string;
+  xUrl?: string;
   featured: boolean;
 };
 
@@ -32,7 +34,56 @@ export type BlogPostMeta = BlogFrontmatter & {
 
 export type ProjectMeta = ProjectFrontmatter & {
   slug: string;
+  coverImage?: string;
 };
+
+function normalizeProjectKey(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function getProjectCoverImage(slug: string, title?: string) {
+  const slugVariants = [
+    slug,
+    slug.replace(/-/g, "_"),
+    slug.replace(/_/g, "-"),
+    title ?? ""
+  ].filter(Boolean);
+  const fileNames = ["cover.png", "cover.jpg", "cover.jpeg", "cover.webp"];
+  const candidateFolders = fs.existsSync(publicProjectsRoot)
+    ? fs.readdirSync(publicProjectsRoot).filter((entry) => {
+        const entryPath = path.join(publicProjectsRoot, entry);
+        return fs.statSync(entryPath).isDirectory();
+      })
+    : [];
+
+  const desiredKeys = slugVariants.map(normalizeProjectKey);
+  const matchedFolders = [
+    ...new Set(
+      candidateFolders.filter((folder) => {
+        const folderKey = normalizeProjectKey(folder);
+
+        return desiredKeys.some(
+          (desiredKey) =>
+            desiredKey === folderKey ||
+            desiredKey.includes(folderKey) ||
+            folderKey.includes(desiredKey)
+        );
+      })
+    )
+  ];
+
+  for (const folder of [...slugVariants, ...matchedFolders]) {
+    for (const fileName of fileNames) {
+      const fullPath = path.join(publicProjectsRoot, folder, fileName);
+
+      if (fs.existsSync(fullPath)) {
+        return `/projects/${folder}/${fileName}`;
+      }
+    }
+  }
+
+  return undefined;
+}
 
 function readDirectoryFiles(dir: string) {
   return fs.readdirSync(dir).filter((file) => file.endsWith(".mdx"));
@@ -63,10 +114,12 @@ function parseProjectFile(fileName: string): ProjectMeta & { content: string } {
   const fullPath = path.join(projectRoot, fileName);
   const source = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(source);
+  const frontmatter = data as ProjectFrontmatter;
 
   return {
-    ...(data as ProjectFrontmatter),
+    ...frontmatter,
     slug,
+    coverImage: getProjectCoverImage(slug, frontmatter.title),
     content
   };
 }
@@ -123,10 +176,12 @@ export async function getProjectBySlug(slug: string) {
 
   const source = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(source);
+  const frontmatter = data as ProjectFrontmatter;
 
   return {
-    ...(data as ProjectFrontmatter),
+    ...frontmatter,
     slug,
+    coverImage: getProjectCoverImage(slug, frontmatter.title),
     content
   };
 }
