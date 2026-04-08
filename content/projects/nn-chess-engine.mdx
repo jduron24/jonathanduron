@@ -1,0 +1,44 @@
+---
+title: "Nueral Network Chess Engine"
+description: "A neural network-driven chess engine that combines classical search with modern self-play learning to evaluate positions and improve over time."
+date: "2025-12-07"
+tags:
+  - Python
+  - PyTorch
+  - Neural Networks
+  - Chess Engine
+  - AlphaZero
+  - Reinforcement Learning
+  - FastAPI
+url: ""
+github: "https://github.com/jduron24/NN-chess-engine"
+featured: true
+---
+
+## Overview
+
+NN Chess Engine is an experimental chess system that blends traditional engine design with modern machine learning. Instead of relying purely on hand-crafted evaluation functions, the engine uses a neural network to understand board positions and guide decision-making.
+
+The system is inspired by AlphaZero-style approaches, where the model learns by playing games against itself and continuously improving through feedback. By combining neural evaluation with search techniques, the engine moves beyond static heuristics and begins to capture positional understanding, long-term strategy, and pattern recognition.
+
+The project includes both a backend engine and an interactive interface, allowing users to play against the model, test positions, and observe how the engine evaluates different moves. It serves as both a functional chess engine and a research platform for exploring how learning-based systems can outperform traditional rule-based approaches.
+
+## What I worked on
+
+- Designed and implemented a chess engine using bitboard-style representations to efficiently encode board states and generate legal moves.
+- Built a neural network using PyTorch to evaluate positions and guide move selection, replacing traditional heuristic evaluation.
+- Developed a self-play training pipeline where the engine generates its own data and improves over time.
+- Integrated search algorithms such as minimax, alpha-beta pruning, and/or Monte Carlo Tree Search with neural network outputs to balance exploration and optimal play.
+- Structured training data pipelines and handled large datasets for efficient loading and iteration during model training.
+- Created an API layer using FastAPI to expose engine functionality and support an interactive web-based interface.
+- Implemented model serialization and loading to persist and reuse trained networks.
+- Debugged and optimized cross-platform setup from macOS to Windows, including dependency management and training workflows.
+
+## Outcome
+
+- Demonstrates how neural networks can replace traditional evaluation functions in chess engines and improve through self-play.
+- Provides a working environment to experiment with search algorithms, training strategies, and model architectures.
+- Bridges classical computer science such as search and bitboards with modern AI like deep learning and reinforcement learning.
+- Serves as a strong technical project showcasing systems design, machine learning, and performance optimization.
+
+More importantly, NN Chess Engine reflects a shift from hard-coded intelligence to learned behavior, where the engine develops its own understanding of the game through experience rather than explicit rules.
