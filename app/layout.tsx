@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     template: "%s | Jonathan Duron"
   },
   description:
-    "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
+    "Personal website for collaborators, and curious people on the internet.",
   openGraph: {
     title: "Jonathan Duron",
     description:
-      "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
+      "Personal website for collaborators, and curious people on the internet.",
     type: "website",
     url: "https://example.com",
     images: ["/og"]
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jonathan Duron",
     description:
-      "[PLACEHOLDER] Personal website for recruiters, collaborators, and curious people on the internet.",
+      "Personal website for collaborators, and curious people on the internet.",
     images: ["/og"]
   }
 };
