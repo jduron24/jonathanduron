@@ -99,6 +99,21 @@ export default function AboutPage() {
           </h2>
           <div className="mt-6 grid gap-8 text-lg leading-9 text-foreground/82">
             <div>
+              <p className="font-semibold text-foreground">Duron Tech LLC</p>
+              <p className="text-base text-muted-foreground">
+                Software Engineer | February 2026 - Present
+              </p>
+              <p className="mt-3 max-w-3xl">
+                Build tailored software systems for businesses that have outgrown
+                manual workflows, spreadsheets, and disconnected operational
+                tools. I consult directly with business owners to identify
+                workflow bottlenecks, translate requirements into software
+                solutions, and deliver tools that improve speed, accuracy, and
+                visibility across day-to-day operations.
+              </p>
+            </div>
+
+            <div>
               <p className="font-semibold text-foreground">DriveFlow</p>
               <p className="text-base text-muted-foreground">
                 Full Stack Software Engineer | August 2025 - Present
